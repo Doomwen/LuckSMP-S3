@@ -1,7 +1,7 @@
 package pl.managers;
 
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -19,21 +19,21 @@ import pl.Main;
 
 public class GlowManager implements Listener {
     public static void registerTeams() {
-        teams("red_lucksmps3_custom", ChatColor.RED);
-        teams("aqua_lucksmps3_custom", ChatColor.AQUA);
-        teams("pink_lucksmps3_custom", ChatColor.LIGHT_PURPLE);
-        teams("gold_lucksmps3_custom", ChatColor.GOLD);
-        teams("gray_lucksmps3_custom", ChatColor.GRAY);
+        teams("red_lucksmps3_custom", NamedTextColor.RED);
+        teams("aqua_lucksmps3_custom", NamedTextColor.AQUA);
+        teams("pink_lucksmps3_custom", NamedTextColor.LIGHT_PURPLE);
+        teams("gold_lucksmps3_custom", NamedTextColor.GOLD);
+        teams("gray_lucksmps3_custom", NamedTextColor.GRAY);
     }
 
-    public static void teams(String name, ChatColor color) {
+    public static void teams(String name, NamedTextColor color) {
         Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
         Team team = board.getTeam(name);
-
         if (team == null) {
             team = board.registerNewTeam(name);
-            team.setColor(color);
         }
+
+        team.color(color);
     }
 
     public static void setTeam(Entity entity, String teamName) {

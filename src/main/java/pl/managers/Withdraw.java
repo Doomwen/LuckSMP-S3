@@ -1,6 +1,7 @@
 package pl.managers;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,13 +31,13 @@ public class Withdraw implements CommandExecutor, Listener {
 
         final AbilityMapping hack = Main.getInstance().getAbilityManager().getAbility(player.getUniqueId());
         if (hack == null) {
-            player.sendMessage(ChatColor.RED + "No luck book equipped");
+            player.sendMessage(Component.text("No luck book equipped", NamedTextColor.RED));
             return true;
         }
         ItemStack item = hack.createItem();
         if (player.getInventory().firstEmpty() == -1) {
             player.getWorld().dropItemNaturally(player.getLocation(), item);
-            player.sendMessage(ChatColor.YELLOW + "The book was dropped on the ground.");
+            player.sendMessage(Component.text("The book was dropped on the ground.", NamedTextColor.YELLOW));
         } else {
             player.getInventory().addItem(item);
         }

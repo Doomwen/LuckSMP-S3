@@ -1,11 +1,12 @@
 package pl;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Books {
@@ -23,7 +24,7 @@ public class Books {
     public static ItemStack createWindManipulationBook() {
         ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta meta = book.getItemMeta();
-        meta.setDisplayName("§fᴡɪɴᴅ ᴍᴀɴɪᴘᴜʟᴀᴛɪᴏɴ ʙᴏᴏᴋ");
+        meta.displayName(Component.text("ᴡɪɴᴅ ᴍᴀɴɪᴘᴜʟᴀᴛɪᴏɴ ʙᴏᴏᴋ", NamedTextColor.WHITE));
         meta.setLore(lore("wind-manipulation"));
         meta.setEnchantmentGlintOverride(false);
         meta.setCustomModelData(3);
@@ -35,7 +36,7 @@ public class Books {
     public static ItemStack createHellScorch() {
         ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta meta = book.getItemMeta();
-        meta.setDisplayName("§6ʜᴇʟʟꜱᴄᴏʀᴄʜ ʙᴏᴏᴋ");
+        meta.displayName(Component.text("ʜᴇʟʟꜱᴄᴏʀᴄʜ ʙᴏᴏᴋ", NamedTextColor.GOLD));
         meta.setLore(lore("hellscorch"));
         meta.setEnchantmentGlintOverride(false);
         meta.setCustomModelData(6);
@@ -47,7 +48,7 @@ public class Books {
     public static ItemStack createDarkSense() {
         ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta meta = book.getItemMeta();
-        meta.setDisplayName("§7ᴅᴀʀᴋ ꜱᴇɴꜱᴇ ʙᴏᴏᴋ");
+        meta.displayName(Component.text("ᴅᴀʀᴋ ꜱᴇɴꜱᴇ ʙᴏᴏᴋ", NamedTextColor.GRAY));
         meta.setLore(lore("dark-sense"));
         meta.setEnchantmentGlintOverride(false);
         meta.setCustomModelData(4);
@@ -59,7 +60,7 @@ public class Books {
     public static ItemStack createAdrenalineRush() {
         ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta meta = book.getItemMeta();
-        meta.setDisplayName("§dᴀᴅʀᴇɴᴀʟɪɴᴇ ʀᴜꜱʜ ʙᴏᴏᴋ");
+        meta.displayName(Component.text("ᴀᴅʀᴇɴᴀʟɪɴᴇ ʀᴜꜱʜ ʙᴏᴏᴋ", NamedTextColor.LIGHT_PURPLE));
         meta.setLore(lore("adrenaline-rush"));
         meta.setEnchantmentGlintOverride(false);
         meta.setCustomModelData(5);
@@ -71,7 +72,7 @@ public class Books {
     public static ItemStack createRawStrength() {
         ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta meta = book.getItemMeta();
-        meta.setDisplayName("§cʀᴀᴡ ꜱᴛʀᴇɴɢᴛʜ ʙᴏᴏᴋ");
+        meta.displayName(Component.text("ʀᴀᴡ ꜱᴛʀᴇɴɢᴛʜ ʙᴏᴏᴋ", NamedTextColor.RED));
         meta.setLore(lore("raw-strength"));
         meta.setEnchantmentGlintOverride(false);
         meta.setCustomModelData(10);
@@ -83,7 +84,7 @@ public class Books {
     public static ItemStack createThunderCharge() {
         ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta meta = book.getItemMeta();
-        meta.setDisplayName("§bᴛʜᴜɴᴅᴇʀᴄʜᴀʀɢᴇ ʙᴏᴏᴋ");
+        meta.displayName(Component.text("ᴛʜᴜɴᴅᴇʀᴄʜᴀʀɢᴇ ʙᴏᴏᴋ", NamedTextColor.AQUA));
         meta.setLore(lore("thunder-charge"));
         meta.setEnchantmentGlintOverride(false);
         meta.setCustomModelData(11);
@@ -95,7 +96,7 @@ public class Books {
     public static ItemStack createLuckBook() {
         ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta meta = book.getItemMeta();
-        meta.setDisplayName("§aʟᴜᴄᴋ ʙᴏᴏᴋ");
+        meta.displayName(Component.text("ʟᴜᴄᴋ ʙᴏᴏᴋ", NamedTextColor.GREEN));
         meta.setLore(lore("luck"));
         meta.setEnchantmentGlintOverride(false);
         meta.setCustomModelData(88);

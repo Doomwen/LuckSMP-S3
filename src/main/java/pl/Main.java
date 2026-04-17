@@ -1,5 +1,7 @@
 package pl;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -151,13 +153,13 @@ public final class Main extends JavaPlugin implements Listener {
         assert cmd != null;
         cmd.setExecutor((sender, command, label, args) -> {
             if (args.length < 2) {
-                sender.sendMessage(ChatColor.RED + "Usage: /setluckbook <player> <book>");
+                sender.sendMessage(Component.text("Usage: /setluckbook <player> <book>", NamedTextColor.RED));
                 return true;
             }
 
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null || !target.isOnline()) {
-                sender.sendMessage(ChatColor.RED + "Player not found or not online.");
+                sender.sendMessage(Component.text("Player not found or not online.", NamedTextColor.RED));
                 return true;
             }
 
@@ -170,7 +172,7 @@ public final class Main extends JavaPlugin implements Listener {
             }
 
             abilityManager.setAbility(target.getUniqueId(), luck);
-            sender.sendMessage(ChatColor.GREEN + "Set luck book for " + target.getName() + " to " + luck);
+            sender.sendMessage(Component.text("Set luck book for " + target.getName() + " to " + luck, NamedTextColor.GREEN));
             return true;
         });
         cmd.setTabCompleter((sender, command, alias, args) -> {

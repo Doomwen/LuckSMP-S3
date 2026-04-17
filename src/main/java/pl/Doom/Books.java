@@ -3,6 +3,7 @@ package pl.Doom;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,9 +19,7 @@ public class Books implements Listener, CommandExecutor {
             .map(AbilityMapping::createItem)
             .collect(Collectors.toList());
 
-    public Books() {
-    }
-    String GUI = "§f\uE900\uE901";
+    Component GUI = Component.text("\uE900\uE901");
 
     private void openSwordSelectionGUI(Player player) {
         Inventory gui = Bukkit.createInventory(null, 18, GUI);
@@ -54,7 +53,7 @@ public class Books implements Listener, CommandExecutor {
     @EventHandler
     public void Interact(InventoryClickEvent event) {
         if (event.getWhoClicked() instanceof Player player) {
-            String guiTitle = event.getView().getTitle();
+            Component guiTitle = event.getView().title();
 
             if (guiTitle.equals(GUI)) {
                 if (!player.isOp()) {

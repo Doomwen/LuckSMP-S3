@@ -1,15 +1,14 @@
 package pl.Doom;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import pl.CooldownCommand;
 import pl.Main;
 import pl.managers.CooldownManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class ActionBarUpdater extends BukkitRunnable {
@@ -22,13 +21,15 @@ public class ActionBarUpdater extends BukkitRunnable {
             AbilityMapping book = Main.getAbilityManager().getAbility(uuid);
 
             if (book == null)return;
-            String color = book.getColor();
-            String cooldown = formatTime(CooldownManager.getCooldownTimeLeft(uuid, "1"));
-            String cooldown2 = "";
+
+            TextColor color = book.getColor();
+            Component msg = Component.text(formatTime(CooldownManager.getCooldownTimeLeft(uuid, "1")), color);
             if (CooldownManager.isOnCooldown(uuid, "2")) {
-                cooldown2 = "    §7|    " + color + formatTime(CooldownManager.getCooldownTimeLeft(uuid, "2"));
+                msg = msg.append(Component.text("    |    ", NamedTextColor.GRAY));
+                msg = msg.append(Component.text(formatTime(CooldownManager.getCooldownTimeLeft(uuid, "2")), color));
             }
-            player.sendActionBar(color + cooldown + cooldown2);
+
+            player.sendActionBar(msg);
         }
     }
 

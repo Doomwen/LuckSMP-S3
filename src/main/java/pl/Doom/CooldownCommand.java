@@ -1,7 +1,8 @@
 package pl.Doom;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,11 +21,11 @@ public class CooldownCommand implements CommandExecutor {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 CooldownManager.removeAllCooldowns(player.getUniqueId());
-                player.sendMessage(ChatColor.GREEN + "Your cooldowns have been cleared!");
+                player.sendMessage(Component.text("Your cooldowns have been cleared!", NamedTextColor.GREEN));
                 player.setCooldown(Material.SCULK_CATALYST, 1);
                 player.updateInventory();
             } else {
-                sender.sendMessage(ChatColor.RED + "Only players can clear their own cooldowns.");
+                sender.sendMessage(Component.text("Only players can clear their own cooldowns.", NamedTextColor.RED));
             }
             return true;
         }
@@ -34,12 +35,12 @@ public class CooldownCommand implements CommandExecutor {
         if (targetPlayer != null && targetPlayer.isOnline()) {
             UUID playerUUID = targetPlayer.getUniqueId();
             CooldownManager.removeAllCooldowns(playerUUID);
-            sender.sendMessage(ChatColor.GREEN + "Cooldowns cleared for " + targetPlayer.getName() + "!");
+            sender.sendMessage(Component.text("Cooldowns cleared for " + targetPlayer.getName() + "!", NamedTextColor.GREEN));
 
             targetPlayer.setCooldown(Material.SCULK_CATALYST, 1);
             targetPlayer.updateInventory();
         } else {
-            sender.sendMessage(ChatColor.RED + "Player '" + args[0] + "' not found or not online.");
+            sender.sendMessage(Component.text("Player '" + args[0] + "' not found or not online.", NamedTextColor.RED));
         }
 
         return true;

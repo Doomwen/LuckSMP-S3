@@ -1,5 +1,7 @@
 package pl;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,7 +19,7 @@ public class CooldownCommand implements CommandExecutor {
             if (sender instanceof Player player) {
                 target = player;
             } else {
-                sender.sendMessage("§cYou are not a player");
+                sender.sendMessage(Component.text("You are not a player", NamedTextColor.RED));
                 return true;
             }
         } else {
@@ -26,9 +28,9 @@ public class CooldownCommand implements CommandExecutor {
 
         if (target != null && target.isOnline()) {
             CooldownManager.removeAllCooldowns(target.getUniqueId());
-            sender.sendMessage("§aCooldowns cleared for " + target.getName() + "!");
+            sender.sendMessage(Component.text("Cooldowns cleared for " + target.getName() + "!", NamedTextColor.GREEN));
         } else {
-            sender.sendMessage("§c" + args[0] + " is not online.");
+            sender.sendMessage(Component.text(args[0] + " is not online.", NamedTextColor.RED));
         }
 
         return true;

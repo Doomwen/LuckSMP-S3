@@ -1,12 +1,13 @@
 package pl.managers;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
 import pl.Doom.AbilityMapping;
 import pl.Main;
 
@@ -16,7 +17,7 @@ public class EquipManager implements Listener {
     public boolean handleLegendaryHack(Player player, AbilityMapping luckBook) {
         boolean hasLuck = Main.getInstance().getAbilityManager().getAbility(player.getUniqueId()) != null;
         if (hasLuck) {
-            player.sendMessage("§cYou already have a luck book equipped");
+            player.sendMessage(Component.text("You already have a luck book equipped", NamedTextColor.RED));
             return false;
         }
         if (CooldownManager.isOnCooldown(player.getUniqueId(), "equip")) {

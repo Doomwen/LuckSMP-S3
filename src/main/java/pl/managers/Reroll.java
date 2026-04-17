@@ -1,5 +1,10 @@
 package pl.managers;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.title.Title;
+import net.kyori.adventure.title.Title.Times;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,9 +16,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import pl.Books;
 import pl.Doom.AbilityMapping;
-import pl.Doom.Utils.ChatUtil;
 import pl.Main;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -56,11 +61,11 @@ public class Reroll implements Listener {
                 .toList();
 
         List<AbilityMapping> fullList = Arrays.stream(AbilityMapping.values())
-                .filter(mapping -> !banned.contains(ChatColor.stripColor(mapping.name()).toUpperCase()))
+                .filter(mapping -> !banned.contains(mapping.name()))
                 .toList();
 
         if (fullList.isEmpty()) {
-            player.sendMessage(ChatColor.RED + "No available books to roll.");
+            player.sendMessage(Component.text("No available books to roll.", NamedTextColor.RED));
             return;
         }
 
@@ -68,10 +73,11 @@ public class Reroll implements Listener {
         Random random = new Random();
         do {
             finalMapping = fullList.get(random.nextInt(fullList.size()));
-        } while (fullList.size() > 1 && finalMapping == fullList.get((12 - 1) % fullList.size()));
+        } while (fullList.size() > 1 && finalMapping == fullList.get(11 % fullList.size()));
 
-        String finalName = finalMapping.getHackName();
-        AbilityMapping finalMapping1 = finalMapping;
+        Component finalName = finalMapping.getHackName();
+        final AbilityMapping finalMapping1 = finalMapping;
+        final ItemStack item = finalMapping.createItem();
 
         player.playSound(player.getLocation(), Sound.BLOCK_CHISELED_BOOKSHELF_INSERT_ENCHANTED, 1F, 1F);
 
@@ -95,21 +101,20 @@ public class Reroll implements Listener {
             public void run() {
                 if (index < totalCycles) {
                     AbilityMapping current = cycle.get(index % cycle.size());
-                    player.sendTitle(current.getCooldownEmoji(), "§l" + current.getHackName(), 0, 20, 10);
+                    player.showTitle(Title.title(Component.text(current.getCooldownEmoji()), current.getHackName().decorate(TextDecoration.BOLD), Times.times(Duration.ZERO, Duration.ofSeconds(20), Duration.ofSeconds(10))));
                     player.playSound(player.getLocation(), Sound.BLOCK_CHISELED_BOOKSHELF_INSERT_ENCHANTED, 1F, 1F);
                     index++;
                     Color color = getColor(current);
                     circleParticle(player.getLocation(), color);
                 } else {
-                    player.sendTitle(finalMapping1.getCooldownEmoji(), "§l" + finalName, 10, 60, 10);
+                    player.showTitle(Title.title(Component.text(finalMapping1.getCooldownEmoji()), finalName.decorate(TextDecoration.BOLD), Times.times(Duration.ofSeconds(10), Duration.ofSeconds(60), Duration.ofSeconds(10))));
                     player.playSound(player.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1F, 1F);
                     Boolean broadcast = Main.getInstance().getConfig().getBoolean("broadcast_obtaining_luck", true);
                     if (broadcast) {
-                        Bukkit.broadcastMessage("§a" + player.getName() + " has obtained " + ChatUtil.fancyFont(finalName));
+                        Bukkit.broadcast(Component.text(player.getName() + " has obtained ", NamedTextColor.GREEN).append(item.displayName()));
                     }
 
-                    ItemStack reward = finalMapping1.createItem();
-                    HashMap<Integer, ItemStack> leftovers = player.getInventory().addItem(reward);
+                    HashMap<Integer, ItemStack> leftovers = player.getInventory().addItem(item);
                     for (ItemStack leftover : leftovers.values()) {
                         player.getWorld().dropItem(player.getLocation(), leftover);
                     }

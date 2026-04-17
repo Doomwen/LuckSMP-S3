@@ -1,12 +1,14 @@
 package pl.updateCheck;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.PluginEnableEvent;
+
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import pl.Main;
 
 import java.io.BufferedReader;
@@ -59,7 +61,7 @@ public class updateCheck implements Listener {
 
                 if (!latestVersion.equalsIgnoreCase(currentVersion)) {
                     Bukkit.getRegionScheduler().execute(Main.getInstance(), player.getLocation(), () -> {
-                        player.sendMessage(ChatColor.GOLD + "[" + plugName + "] A new version is available: v" + finalLatestVersion);
+                        player.sendMessage(Component.text("[" + plugName + "] A new version is available: v" + finalLatestVersion, NamedTextColor.GOLD));
                     });
                 }
             } catch (Exception e) {
