@@ -1,0 +1,10 @@
+# Gradle Folder
+.gradle/
+
+# Build Folders
+target/
+build/
+
+# IDE Folders
+.idea/
+.vscode/
