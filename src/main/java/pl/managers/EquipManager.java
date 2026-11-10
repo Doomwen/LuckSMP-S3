@@ -34,7 +34,7 @@ public class EquipManager implements Listener {
         
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        if (item.getType() != Material.ENCHANTED_BOOK) return;
+        if (item.getType() != Material.BOOK) return;
 
         AbilityMapping luckBook = AbilityMapping.fromItem(item);
         if (luckBook != null) {

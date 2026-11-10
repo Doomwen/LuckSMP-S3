@@ -1,5 +1,7 @@
 package pl.managers;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.title.Title;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +16,7 @@ import pl.Doom.AbilityMapping;
 import pl.Doom.Utils.ChatUtil;
 import pl.Main;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -93,15 +96,28 @@ public class Reroll implements Listener {
 
             @Override
             public void run() {
-                if (index < totalCycles) {
+                if (index < totalCycles) { // rolling
                     AbilityMapping current = cycle.get(index % cycle.size());
-                    player.sendTitle(current.getCooldownEmoji(), "§l" + current.getHackName(), 0, 20, 10);
+                    Title title = Title.title(
+                            current.getCooldownEmoji(),
+                            Component.text("§l" + current.getHackName()),
+                            Title.Times.times(Duration.ofMillis(0), Duration.ofSeconds(1), Duration.ofMillis(0))
+                    );
+                    player.showTitle(title);
+
                     player.playSound(player.getLocation(), Sound.BLOCK_CHISELED_BOOKSHELF_INSERT_ENCHANTED, 1F, 1F);
                     index++;
                     Color color = getColor(current);
                     circleParticle(player.getLocation(), color);
-                } else {
-                    player.sendTitle(finalMapping1.getCooldownEmoji(), "§l" + finalName, 10, 60, 10);
+                } else { // selected
+                    Title title = Title.title(
+                            finalMapping1.getCooldownEmoji(),
+                            Component.text("§l" + finalName),
+                            Title.Times.times(Duration.ofMillis(500), Duration.ofSeconds(3), Duration.ofMillis(500))
+                    );
+                    player.showTitle(title);
+
+
                     player.playSound(player.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1F, 1F);
                     Boolean broadcast = Main.getInstance().getConfig().getBoolean("broadcast_obtaining_luck", true);
                     if (broadcast) {

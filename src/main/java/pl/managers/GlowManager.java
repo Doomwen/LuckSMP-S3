@@ -18,7 +18,7 @@ import pl.Books;
 import pl.Main;
 
 public class GlowManager implements Listener {
-    public static void registerTeams() {
+    public GlowManager() {
         teams("red_lucksmps3_custom", ChatColor.RED);
         teams("aqua_lucksmps3_custom", ChatColor.AQUA);
         teams("pink_lucksmps3_custom", ChatColor.LIGHT_PURPLE);
@@ -82,7 +82,7 @@ public class GlowManager implements Listener {
                 for (Item entity : loc.getWorld().getNearbyEntitiesByType(Item.class, loc, 2, 2, 2)) {
                     ItemStack item = entity.getItemStack();
 
-                    if (item.getType() != Material.ENCHANTED_BOOK) continue;
+                    if (item.getType() != Material.BOOK) continue;
 
                     if (Books.areSimilar(item, Books.createThunderCharge())) {
                         setTeam(entity, "aqua_lucksmps3_custom");

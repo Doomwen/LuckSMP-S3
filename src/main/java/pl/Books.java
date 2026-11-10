@@ -21,7 +21,7 @@ public class Books {
 
 
     public static ItemStack createWindManipulationBook() {
-        ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
+        ItemStack book = new ItemStack(Material.BOOK);
         ItemMeta meta = book.getItemMeta();
         meta.setDisplayName("§fᴡɪɴᴅ ᴍᴀɴɪᴘᴜʟᴀᴛɪᴏɴ ʙᴏᴏᴋ");
         meta.setLore(lore("wind-manipulation"));
@@ -33,7 +33,7 @@ public class Books {
     }
 
     public static ItemStack createHellScorch() {
-        ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
+        ItemStack book = new ItemStack(Material.BOOK);
         ItemMeta meta = book.getItemMeta();
         meta.setDisplayName("§6ʜᴇʟʟꜱᴄᴏʀᴄʜ ʙᴏᴏᴋ");
         meta.setLore(lore("hellscorch"));
@@ -45,7 +45,7 @@ public class Books {
     }
 
     public static ItemStack createDarkSense() {
-        ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
+        ItemStack book = new ItemStack(Material.BOOK);
         ItemMeta meta = book.getItemMeta();
         meta.setDisplayName("§7ᴅᴀʀᴋ ꜱᴇɴꜱᴇ ʙᴏᴏᴋ");
         meta.setLore(lore("dark-sense"));
@@ -57,7 +57,7 @@ public class Books {
     }
 
     public static ItemStack createAdrenalineRush() {
-        ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
+        ItemStack book = new ItemStack(Material.BOOK);
         ItemMeta meta = book.getItemMeta();
         meta.setDisplayName("§dᴀᴅʀᴇɴᴀʟɪɴᴇ ʀᴜꜱʜ ʙᴏᴏᴋ");
         meta.setLore(lore("adrenaline-rush"));
@@ -69,7 +69,7 @@ public class Books {
     }
 
     public static ItemStack createRawStrength() {
-        ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
+        ItemStack book = new ItemStack(Material.BOOK);
         ItemMeta meta = book.getItemMeta();
         meta.setDisplayName("§cʀᴀᴡ ꜱᴛʀᴇɴɢᴛʜ ʙᴏᴏᴋ");
         meta.setLore(lore("raw-strength"));
@@ -81,7 +81,7 @@ public class Books {
     }
 
     public static ItemStack createThunderCharge() {
-        ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
+        ItemStack book = new ItemStack(Material.BOOK);
         ItemMeta meta = book.getItemMeta();
         meta.setDisplayName("§bᴛʜᴜɴᴅᴇʀᴄʜᴀʀɢᴇ ʙᴏᴏᴋ");
         meta.setLore(lore("thunder-charge"));
@@ -93,7 +93,7 @@ public class Books {
     }
 
     public static ItemStack createLuckBook() {
-        ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
+        ItemStack book = new ItemStack(Material.BOOK);
         ItemMeta meta = book.getItemMeta();
         meta.setDisplayName("§aʟᴜᴄᴋ ʙᴏᴏᴋ");
         meta.setLore(lore("luck"));

@@ -15,9 +15,10 @@ import java.util.UUID;
 
 public class AbilityManager implements Listener {
 
-    public final File file;
-    public FileConfiguration config;
+    public static File file;
+    public static FileConfiguration config;
     public static HashMap<UUID, AbilityMapping> BOOK = new HashMap<>();
+    public static final boolean NIMLOT = Main.getInstance().getConfig().getBoolean("nimlot", false);
 
     @EventHandler
     public void enable(PluginEnableEvent event) {
@@ -57,7 +58,9 @@ public class AbilityManager implements Listener {
         }
         config = YamlConfiguration.loadConfiguration(file);
         lastModified = fileLastModified;
-    } public void saveConfig() {
+    }
+
+    public static void saveConfig() {
         try {
             config.save(file);
         } catch (IOException e) {
@@ -65,8 +68,9 @@ public class AbilityManager implements Listener {
         }
     }
 
-    public void setAbility(UUID playerUUID, AbilityMapping hackName) {
+    public static void setAbility(UUID playerUUID, AbilityMapping hackName) {
         BOOK.put(playerUUID, hackName);
+        if (NIMLOT)return;
         if (hackName != null) {
             config.set(playerUUID + "", hackName.toString());
         } else {

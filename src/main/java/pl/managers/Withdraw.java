@@ -41,7 +41,7 @@ public class Withdraw implements CommandExecutor, Listener {
             player.getInventory().addItem(item);
         }
 
-        hackManager.setAbility(player.getUniqueId(), null);
+        AbilityManager.setAbility(player.getUniqueId(), null);
         player.playSound(player.getLocation(), Sound.BLOCK_CHISELED_BOOKSHELF_PICKUP, 1f, 1f);
         return true;
     }

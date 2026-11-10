@@ -1,5 +1,6 @@
 package pl.Doom;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,11 +14,10 @@ import pl.Main;
 
 public class EquippedLuckCommand implements Listener, CommandExecutor {
 
-    String GUI = "§f\uE900\uE902";
+    Component GUI = Component.text("§f\uF000\uF001").font(AbilityMapping.FONT);
 
     private void openEquippedBooksGUI(Player player) {
-        String GUI2 = GUI;
-        Inventory gui = Bukkit.createInventory(null, 9, GUI2);
+        Inventory gui = Bukkit.createInventory(null, 9, GUI);
         AbilityMapping luck = Main.getInstance().getAbilityManager().getAbility(player.getUniqueId());
         if (luck != null) {
             gui.setItem(4, luck.createItem());
@@ -39,9 +39,9 @@ public class EquippedLuckCommand implements Listener, CommandExecutor {
 
     @EventHandler
     public void Interact(InventoryClickEvent event) {
-        if (event.getWhoClicked() instanceof Player player) {
-            String guiTitle = event.getView().getTitle();
-            if (guiTitle.contains(GUI)) {
+        if (event.getWhoClicked() instanceof Player) {
+            Component guiTitle = event.getView().title();
+            if (guiTitle.equals(GUI)) {
                 event.setCancelled(true);
             }
         }

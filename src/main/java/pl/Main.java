@@ -103,7 +103,6 @@ public final class Main extends JavaPlugin implements Listener {
         Objects.requireNonNull(getCommand("untrust")).setExecutor(new TrustCommand(trustManager));
 
         Objects.requireNonNull(getCommand("cooldown")).setExecutor(new CooldownCommand());
-        GlowManager.registerTeams();
     }
 
     public void ezCommands() {
@@ -135,6 +134,21 @@ public final class Main extends JavaPlugin implements Listener {
 
             return true;
         });
+
+        Objects.requireNonNull(getCommand("clearluck")).setExecutor((sender, command, label, args) -> {
+            Player target = Bukkit.getPlayer(args[0]);
+            if (target == null){
+                return true;
+            }
+
+            if (sender instanceof Player player) {
+                player.sendMessage("§aCleared " + target.getName() + "'s luck book");
+            }
+
+            AbilityManager.setAbility(target.getUniqueId(), null);
+            return true;
+        });
+
 
         Objects.requireNonNull(getCommand("luckstart")).setExecutor((sender, command, label, args) -> {
             started = true;

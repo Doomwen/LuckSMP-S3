@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import pl.Doom.AbilityMapping;
 import pl.Main;
@@ -18,7 +19,8 @@ public class DarkSense implements Listener {
     public void interact(PlayerInteractEvent event){
         Player player = event.getPlayer();
         if (!event.getAction().isRightClick())return;
-        if (player.getInventory().getItemInMainHand().getType() != Material.SCULK_CATALYST)return;
+        ItemStack item = player.getInventory().getItemInMainHand();
+        if (item.getType() != Material.SCULK_CATALYST)return;
         if (player.hasCooldown(Material.SCULK_CATALYST))return;
         if (Main.getAbilityManager().getAbility(player.getUniqueId()) != AbilityMapping.DARK_SENSE)return;
         event.setCancelled(true);
@@ -28,6 +30,8 @@ public class DarkSense implements Listener {
         int damage = Main.getInstance().getConfig().getInt("damage." + name, 7);
         int cooldown = Main.getInstance().getConfig().getInt("cooldowns." + name, 25);
         player.setCooldown(Material.SCULK_CATALYST, cooldown * 20);
+        item.setAmount(item.getAmount() - 1);
+
         if ((Math.random() * 100) < chance) {
             beam(player, damage);
         }
